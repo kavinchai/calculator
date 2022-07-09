@@ -1,3 +1,13 @@
 body {
   margin: 0;
+  background-color: #282626;
+}
+
+@font-face {
+  font-family: "Oxygen Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Oxygen Mono"), local("OxygenMono-Regular"),
+    url("fonts/oxygen mono/oxygen-mono-v7-latin-regular.woff2") format("woff2"),
+    url("fonts/oxygen mono/oxygen-mono-v7-latin-regular.woff") format("woff");
 }
