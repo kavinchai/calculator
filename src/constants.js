@@ -19,3 +19,5 @@ export const calcBtnVal = [
   ".",
   "=",
 ];
+
+export const maxDisplay = 11;

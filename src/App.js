@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { calcBtnVal } from "./constants";
+import { calcBtnVal, maxDisplay } from "./constants";
 
 const App = () => {
   const [displayNum, setDisplayNum] = useState("");
@@ -33,20 +33,26 @@ const App = () => {
   };
   const handleDecimal = (btn) => {
     console.log(btn);
-    if (!inputList.some(containsDecimalChar)) {
-      setInputList((inputList) => [...inputList, btn]);
+    if (inputList.length < maxDisplay) {
+      if (!inputList.some(containsDecimalChar)) {
+        setInputList((inputList) => [...inputList, btn]);
+      }
     }
   };
   const handleNum = (btn) => {
     console.log(btn);
-    // if (inputList.length > 0){
-    //   if (inputList[0] === "0"){
-    //   }
-    //   else{
-    //     setInputList((inputList) => [...inputList, btn]);
-    //   }
-    // }
-    setInputList((inputList) => [...inputList, btn]);
+
+    if (inputList.length < maxDisplay) {
+      if (inputList.length === 1) {
+        if (inputList[0] === "0") {
+          setInputList([btn]);
+        } else {
+          setInputList((inputList) => [...inputList, btn]);
+        }
+      } else {
+        setInputList((inputList) => [...inputList, btn]);
+      }
+    }
   };
 
   useEffect(() => {
