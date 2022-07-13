@@ -5,6 +5,14 @@ import { calcBtnVal } from "./constants";
 const App = () => {
   const [displayNum, setDisplayNum] = useState("");
   const [inputList, setInputList] = useState([]);
+  const containsDecimalChar = (tmpList) => {
+    for (let i = 0; i < tmpList.length; i++) {
+      if (tmpList[i] === ".") {
+        return true;
+      }
+    }
+    return false;
+  };
   const handleReset = (btn) => {
     console.log(btn);
     setInputList([]);
@@ -30,10 +38,19 @@ const App = () => {
   };
   const handleDecimal = (btn) => {
     console.log(btn);
-    setInputList((inputList) => [...inputList, btn]);
+    if (!containsDecimalChar(inputList)) {
+      setInputList((inputList) => [...inputList, btn]);
+    }
   };
   const handleNum = (btn) => {
     console.log(btn);
+    // if (inputList.length > 0){
+    //   if (inputList[0] === "0"){
+    //   }
+    //   else{
+    //     setInputList((inputList) => [...inputList, btn]);
+    //   }
+    // }
     setInputList((inputList) => [...inputList, btn]);
   };
 
