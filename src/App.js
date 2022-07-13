@@ -49,7 +49,9 @@ const App = () => {
     <div className="app">
       <div className="calcContainer">
         <div className="calcDisplayComponent">
-          <span className="calcDisplay">{displayNum}</span>
+          <span className="calcDisplay">
+            {inputList.length === 0 ? "0" : displayNum}
+          </span>
         </div>
         <div className="calcBtnContainer">
           {calcBtnVal.map((btn, btnIndex) => (
