@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { calcBtnVal, maxDisplay } from "./constants";
-import { convertToNum, calculatePercentage, isSign } from "./helpers";
+import {
+  convertToNum,
+  calculatePercentage,
+  isSign,
+  cleanResult,
+} from "./helpers";
 const App = () => {
   const [displayNum, setDisplayNum] = useState("");
   const [inputList, setInputList] = useState([]);
@@ -10,12 +15,10 @@ const App = () => {
     return element === ".";
   };
   const handleReset = (btn) => {
-    console.log(btn);
     setInputList([]);
     setListCal([]);
   };
   const handleInvert = (btn) => {
-    console.log(btn);
     if (inputList.length > 0) {
       if (inputList[0] !== "-") {
         setInputList(["-", ...inputList]);
@@ -32,7 +35,25 @@ const App = () => {
     }
   };
   const handleEquals = (btn) => {
-    console.log(btn);
+    if (inputList.length > 0 && listCalc.length > 0) {
+      let result;
+      let firstVal = convertToNum(listCalc[0]);
+      let sign = listCalc[1];
+      let secondVal = convertToNum(displayNum);
+      setInputList([]);
+      setListCal([]);
+
+      if (sign === "+") {
+        result = firstVal + secondVal;
+      } else if (sign === "-") {
+        result = firstVal - secondVal;
+      } else if (sign === "/") {
+        result = firstVal / secondVal;
+      } else if (sign === "X") {
+        result = firstVal * secondVal;
+      }
+      setInputList(result.toString());
+    }
   };
   const handleSign = (btn) => {
     if (listCalc.length === 0) {
@@ -45,7 +66,6 @@ const App = () => {
     }
   };
   const handleDecimal = (btn) => {
-    console.log(btn);
     if (inputList.length < maxDisplay) {
       if (!inputList.some(containsDecimalChar)) {
         setInputList((inputList) => [...inputList, btn]);
@@ -53,8 +73,6 @@ const App = () => {
     }
   };
   const handleNum = (btn) => {
-    console.log(btn);
-
     if (inputList.length < maxDisplay) {
       if (inputList.length === 1) {
         if (inputList[0] === "0") {

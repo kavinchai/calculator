@@ -14,6 +14,13 @@ export const calculatePercentage = (num) => {
   return result.toPrecision(2);
 };
 
+export const cleanResult = (result) => {
+  if (result.toString().length < 10 && !result.toString().includes("e")) {
+    return result.toPrecision(1);
+  }
+  return result.toPrecision(9);
+};
+
 export const isSign = (str) => {
   return str === "+" || str === "-" || str === "X" || str === "/";
 };
