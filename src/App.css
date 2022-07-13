@@ -70,7 +70,21 @@
   margin: 1%;
 }
 
+.btn0,
+.btn1,
+.btn2 {
+  background-color: #439ee4;
+}
+
+.btn3,
+.btn7,
+.btn11,
+.btn15,
 .btn18 {
+  background-color: #0984e3;
+}
+
+.btn16 {
   width: 48%;
 }
 

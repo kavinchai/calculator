@@ -5,6 +5,7 @@ import { calcBtnVal, maxDisplay } from "./constants";
 const App = () => {
   const [displayNum, setDisplayNum] = useState("");
   const [inputList, setInputList] = useState([]);
+  const [listCalc, setListCal] = useState([]);
   const containsDecimalChar = (element) => {
     return element === ".";
   };
