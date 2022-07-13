@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { calcBtnVal, maxDisplay } from "./constants";
-
+import { convertToNum, calculatePercentage, isSign } from "./helpers";
 const App = () => {
   const [displayNum, setDisplayNum] = useState("");
   const [inputList, setInputList] = useState([]);
@@ -12,6 +12,7 @@ const App = () => {
   const handleReset = (btn) => {
     console.log(btn);
     setInputList([]);
+    setListCal([]);
   };
   const handleInvert = (btn) => {
     console.log(btn);
@@ -24,13 +25,24 @@ const App = () => {
     }
   };
   const handlePercent = (btn) => {
-    console.log(btn);
+    if (inputList.length > 0 && inputList[0] !== ".") {
+      let num = convertToNum(displayNum);
+      let result = calculatePercentage(num);
+      setInputList([result.toString()]);
+    }
   };
   const handleEquals = (btn) => {
     console.log(btn);
   };
   const handleSign = (btn) => {
-    console.log(btn);
+    if (listCalc.length === 0) {
+      setListCal([displayNum]);
+      setListCal((listCalc) => [...listCalc, btn]);
+      setInputList([]);
+    } else if (listCalc.length === 2 && isSign(listCalc[1])) {
+      setListCal(listCalc.slice(0, -1));
+      setListCal((listCalc) => [...listCalc, btn]);
+    }
   };
   const handleDecimal = (btn) => {
     console.log(btn);
@@ -53,6 +65,18 @@ const App = () => {
       } else {
         setInputList((inputList) => [...inputList, btn]);
       }
+    }
+  };
+
+  const dispClear = (btn) => {
+    if (btn === "C") {
+      if (listCalc.length === 0) {
+        return "C";
+      } else {
+        return "AC";
+      }
+    } else {
+      return btn;
     }
   };
 
@@ -92,7 +116,7 @@ const App = () => {
                   : handleNum(btn);
               }}
             >
-              {btn}
+              {dispClear(btn)}
             </button>
           ))}
         </div>
