@@ -6,6 +6,7 @@ const App = () => {
   const [inputList, setInputList] = useState([]);
   const handleBtnClick = (btn) => {
     console.log(btn);
+    setInputList((inputList) => [...inputList, btn]);
   };
   return (
     <div className="app">
