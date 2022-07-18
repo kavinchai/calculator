@@ -5,7 +5,7 @@ import {
   convertToNum,
   calculatePercentage,
   isSign,
-  cleanDivision,
+  cleanResult,
 } from "./helpers";
 const App = () => {
   const [displayNum, setDisplayNum] = useState("");
@@ -14,11 +14,11 @@ const App = () => {
   const containsDecimalChar = (element) => {
     return element === ".";
   };
-  const handleReset = (btn) => {
+  const handleReset = () => {
     setInputList([]);
     setListCal([]);
   };
-  const handleInvert = (btn) => {
+  const handleInvert = () => {
     if (inputList.length > 0) {
       if (inputList[0] !== "-") {
         setInputList(["-", ...inputList]);
@@ -27,14 +27,14 @@ const App = () => {
       }
     }
   };
-  const handlePercent = (btn) => {
+  const handlePercent = () => {
     if (inputList.length > 0 && inputList[0] !== ".") {
       let num = convertToNum(displayNum);
       let result = calculatePercentage(num);
       setInputList([result.toString()]);
     }
   };
-  const handleEquals = (btn) => {
+  const handleEquals = () => {
     if (inputList.length > 0 && listCalc.length > 0) {
       let result;
       let firstVal = convertToNum(listCalc[0]);
@@ -48,11 +48,11 @@ const App = () => {
       } else if (sign === "-") {
         result = firstVal - secondVal;
       } else if (sign === "/") {
-        result = cleanDivision(firstVal / secondVal);
+        result = firstVal / secondVal;
       } else if (sign === "X") {
         result = firstVal * secondVal;
       }
-      setInputList(result.toString());
+      setInputList(cleanResult(result).toString());
     }
   };
   const handleSign = (btn) => {
@@ -120,13 +120,13 @@ const App = () => {
               className={`btn btn${btnIndex}`}
               onClick={() => {
                 btn === "C"
-                  ? handleReset(btn)
+                  ? handleReset()
                   : btn === "+/-"
-                  ? handleInvert(btn)
+                  ? handleInvert()
                   : btn === "%"
-                  ? handlePercent(btn)
+                  ? handlePercent()
                   : btn === "="
-                  ? handleEquals(btn)
+                  ? handleEquals()
                   : btn === "/" || btn === "X" || btn === "-" || btn === "+"
                   ? handleSign(btn)
                   : btn === "."

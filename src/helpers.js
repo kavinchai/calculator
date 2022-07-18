@@ -14,10 +14,11 @@ export const calculatePercentage = (num) => {
   return result.toPrecision(2);
 };
 
-export const cleanDivision = (a) => {
+export const cleanResult = (a) => {
   const result = parseFloat(a.toPrecision(9));
+
   const stringResult = result.toString();
-  if (stringResult.includes("e")) {
+  if (stringResult.includes("e") || result > 999999999 || result < -999999999) {
     return result.toPrecision(4);
   }
 
