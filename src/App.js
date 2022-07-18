@@ -25,6 +25,8 @@ const App = () => {
       } else {
         setInputList(inputList.slice(1));
       }
+    } else {
+      setInputList(["-", "0"]);
     }
   };
   const handlePercent = () => {
@@ -48,11 +50,11 @@ const App = () => {
       } else if (sign === "-") {
         result = firstVal - secondVal;
       } else if (sign === "/") {
-        result = firstVal / secondVal;
+        result = cleanResult(firstVal / secondVal);
       } else if (sign === "X") {
-        result = firstVal * secondVal;
+        result = cleanResult(firstVal * secondVal);
       }
-      setInputList(cleanResult(result).toString());
+      setInputList(result.toString());
     }
   };
   const handleSign = (btn) => {
@@ -73,6 +75,13 @@ const App = () => {
     }
   };
   const handleNum = (btn) => {
+    if (inputList[0] === "-") {
+      if (inputList.length > 1) {
+        if (inputList[1] === "0") {
+          setInputList(inputList.slice(0, -1));
+        }
+      }
+    }
     if (inputList.length < maxDisplay) {
       if (inputList.length === 1) {
         if (inputList[0] === "0") {
