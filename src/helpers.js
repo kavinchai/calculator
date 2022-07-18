@@ -14,8 +14,8 @@ export const calculatePercentage = (num) => {
   return result.toPrecision(2);
 };
 
-export const cleanResult = (a) => {
-  const result = parseFloat(a);
+export const cleanDivision = (a) => {
+  const result = parseFloat(a.toPrecision(9));
   const stringResult = result.toString();
   if (stringResult.includes("e")) {
     return result.toPrecision(4);

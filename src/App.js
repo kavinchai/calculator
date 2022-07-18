@@ -5,7 +5,7 @@ import {
   convertToNum,
   calculatePercentage,
   isSign,
-  cleanResult,
+  cleanDivision,
 } from "./helpers";
 const App = () => {
   const [displayNum, setDisplayNum] = useState("");
@@ -48,8 +48,7 @@ const App = () => {
       } else if (sign === "-") {
         result = firstVal - secondVal;
       } else if (sign === "/") {
-        result = (firstVal / secondVal).toPrecision(9);
-        result = cleanResult(result);
+        result = cleanDivision(firstVal / secondVal);
       } else if (sign === "X") {
         result = firstVal * secondVal;
       }
