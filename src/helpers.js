@@ -17,10 +17,14 @@ export const calculatePercentage = (num) => {
 export const cleanResult = (a) => {
   const result = parseFloat(a);
   const stringResult = result.toString();
+  if (stringResult.includes("e")) {
+    return result.toPrecision(4);
+  }
+
   if (stringResult.substring(0, 3) === "0.0") {
     return result.toFixed(9);
-  } else if (stringResult.includes("e")) {
-    return result.toPrecision(4);
+  } else if (stringResult[0] === "-") {
+    return result.toFixed(8);
   }
   return result;
 };
