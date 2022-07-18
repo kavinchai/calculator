@@ -48,7 +48,8 @@ const App = () => {
       } else if (sign === "-") {
         result = firstVal - secondVal;
       } else if (sign === "/") {
-        result = firstVal / secondVal;
+        result = (firstVal / secondVal).toPrecision(9);
+        result = cleanResult(result);
       } else if (sign === "X") {
         result = firstVal * secondVal;
       }
